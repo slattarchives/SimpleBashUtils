@@ -1,0 +1,37 @@
+#include "s21_grep.h"
+char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char *flag_chars, int *first_file_index, int *pattern_index, int *pattern_count) {
+    int e_exist = 0;
+    int pattern_found = 0;
+    char **patterns = NULL;
+    for (int i = 1; i < argc; i++) {
+        if (e_exist){
+            patterns = realloc(patterns, ((*pattern_count) + 1) * sizeof(char*));
+            patterns[*pattern_count] = malloc(strlen(argv[i]) + 1);
+            strcpy(patterns[*pattern_count], argv[i]);
+            (*pattern_count)++;
+            e_exist = 0;
+        }
+        else if (argv[i][0] == '-' && argv[i][1] == 'e') {
+            e_exist = 1;
+        } 
+        else if (argv[i][0] == '-'){
+            for (int j = 1; argv[i][j] != '\0'; j++) {
+                flag_chars[(*flag_count)++] = argv[i][j];
+            }
+        } 
+        else {
+            if (!pattern_found){
+                patterns = realloc(patterns, ((*pattern_count) + 1) * sizeof(char*));
+                patterns[*pattern_count] = malloc(strlen(argv[i]) + 1);
+                strcpy(patterns[*pattern_count], argv[i]);
+                (*pattern_count)++;
+                pattern_found = 1;
+            } else {
+                *first_file_index = i;
+            }
+        }
+    }
+    if (*first_file_index != 0 && *pattern_index != 0)
+        raise_flag(*flag_count, flagie, flag_chars);
+    return patterns;
+}
