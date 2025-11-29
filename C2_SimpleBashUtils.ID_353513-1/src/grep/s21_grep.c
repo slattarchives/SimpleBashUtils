@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     int pattern_count = 0;
 
     pattern = parse_flags(argc, argv, &flagie, &flag_count, flag_chars, &first_file_index, &pattern_index, &pattern_count);
-    if (first_file_index == 0 || pattern_index == 0) {
+    if (first_file_index == 0) {
         fprintf(stderr, "no input files\n");
         return 1;
     }

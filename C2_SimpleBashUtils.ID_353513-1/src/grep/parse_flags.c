@@ -9,12 +9,13 @@ char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char 
             patterns[*pattern_count] = malloc(strlen(argv[i]) + 1);
             strcpy(patterns[*pattern_count], argv[i]);
             (*pattern_count)++;
+            pattern_found = 1;
             e_exist = 0;
         }
         else if (argv[i][0] == '-' && argv[i][1] == 'e') {
             e_exist = 1;
         } 
-        else if (argv[i][0] == '-'){
+        else if (argv[i][0] == '-' && argv[i][1] != 'e'){
             for (int j = 1; argv[i][j] != '\0'; j++) {
                 flag_chars[(*flag_count)++] = argv[i][j];
             }
@@ -30,6 +31,8 @@ char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char 
                 *first_file_index = i;
             }
         }
+        printf("Аргумент %d: '%s'\n", i, argv[i]);
+        printf("pattern_found = %d, first_file_index = %d\n", pattern_found, *first_file_index);
     }
     if (*first_file_index != 0 && *pattern_index != 0)
         raise_flag(*flag_count, flagie, flag_chars);

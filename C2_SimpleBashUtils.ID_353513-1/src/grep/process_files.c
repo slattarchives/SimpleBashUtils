@@ -30,8 +30,10 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
             while ((read = getline(&line, &len, fp)) != -1) {
                 for (int k = 0; k < pattern_count; pattern_count++){
                     if (regexec(&regex[k], line, 1, &match, 0) == 0) {  
-                        printf("%.*s\n", (int)(match.rm_eo - match.rm_so), line + match.rm_so);
+                        printf("%s", line);
+                        break;
                     }
+                    break;
                 }
             }
             //for (int i = 0; i < 2; i++) regfree(&regex[i]); //освобождение ресурсов
