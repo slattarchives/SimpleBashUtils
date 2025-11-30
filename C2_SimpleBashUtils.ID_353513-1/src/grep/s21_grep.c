@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     Flags flagie = {0};
     char flag_chars[256] = {0};
     int flag_count = 0;
-    int first_file_index = 0;
+    int first_file_index = -1;
     int pattern_index = 0;
     char **pattern = NULL;
     int pattern_count = 0;
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "no input files\n");
         return 1;
     }
-    
+    raise_flag(flag_count, &flagie, flag_chars);
     
 
     process_file(first_file_index, argc, argv, &flagie, pattern, pattern_count);

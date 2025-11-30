@@ -13,27 +13,30 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
 
             regex_t regex[pattern_count];
             regmatch_t match;//переменная для отлова совпадений
-            int count = 0;
 
             for (int i = 0; i < pattern_count; i++) {
                 if (flagie->iflag == 1){
-                    regcomp(&regex[i], pattern[count], REG_ICASE);
-                    count++;
+                    regcomp(&regex[i], pattern[i], REG_ICASE);
                 }
                 else {
-                    regcomp(&regex[i], pattern[count], 0);
+                    regcomp(&regex[i], pattern[i], 0);
                 }
             }
 
             
 
             while ((read = getline(&line, &len, fp)) != -1) {
-                for (int k = 0; k < pattern_count; pattern_count++){
-                    if (regexec(&regex[k], line, 1, &match, 0) == 0) {  
-                        printf("%s", line);
-                        break;
+                for (int k = 0; k < pattern_count; k++){
+                    if (regexec(&regex[k], line, 1, &match, 0) == 0) {
+                        if (first_file_index == argc - 1){
+                            printf("%s", line);
+                            break;
+                        }
+                        else {
+                            printf("%s:%s", filename, line);
+                            break;
+                        }
                     }
-                    break;
                 }
             }
             //for (int i = 0; i < 2; i++) regfree(&regex[i]); //освобождение ресурсов

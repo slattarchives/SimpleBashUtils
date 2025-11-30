@@ -3,10 +3,10 @@ void raise_flag(int flag_count, Flags *flagie, char *flag_chars) {
     for (int i = 0; i < flag_count; i++) {
         switch (flag_chars[i]) {
             case 'e': flagie->eflag = true; break;
-            case 'i': flagie->iflag = true; flagie->vflag = true; break;
+            case 'i': flagie->iflag = true; break;
             case 'v': flagie->vflag = true; break;
             case 'c': flagie->cflag = true; break;
-            case 'l': flagie->lflag = true; flagie->vflag = true; break;
+            case 'l': flagie->lflag = true; break;
             case 'n': flagie->nflag = true; break;
             case 'h': flagie->hflag = true; break;
             case 's': flagie->sflag = true; break;
