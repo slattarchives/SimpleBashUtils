@@ -30,13 +30,13 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
 
             while ((read = getline(&line, &len, fp)) != -1) {
                 bool match = line_matches(line, regex, pattern_count);
-                    if (flagie->vflag == 1){
-                        match = !match;
-                    }
-                    if (match) {
-                        
-                        output(first_file_index, argc, line_num, line, filename, flagie, &count_cflag);
-                    }
+                if (flagie->vflag == 1){
+                    match = !match;
+                }
+                if (match) {
+                    
+                    output(first_file_index, argc, line_num, line, filename, flagie, &count_cflag);
+                }
                 line_num++;
             }
             if (flagie->cflag == 1){

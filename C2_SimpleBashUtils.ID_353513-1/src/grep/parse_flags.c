@@ -28,9 +28,8 @@ char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char 
                 strcpy(patterns[*pattern_count], argv[i]);
                 (*pattern_count)++;
                 pattern_found = 1;
-            } else {
-                if (*first_file_index == -1)
-                    *first_file_index = i;
+            } else if (*first_file_index == -1){
+                *first_file_index = i;
             }
         }
         //printf("Аргумент %d: '%s'\n", i, argv[i]);
