@@ -1,5 +1,5 @@
 #include "s21_grep.h"
-char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char *flag_chars, int *first_file_index, int *pattern_index, int *pattern_count) {
+char** parse_flags(int argc, char *argv[], int *flag_count, char *flag_chars, int *first_file_index, int *pattern_count) {
     int e_exist = 0;
     int pattern_found = 0;
     char **patterns = NULL;
@@ -35,8 +35,5 @@ char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char 
         //printf("Аргумент %d: '%s'\n", i, argv[i]);
         //printf("pattern_found = %d, first_file_index = %d\n", pattern_found, *first_file_index);
     }
-    //use just because gcc swearing on it 
-    if (*first_file_index != 0 && *pattern_index != 0)
-        printf("%d", flagie->eflag);
     return patterns;
 }

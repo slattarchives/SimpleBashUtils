@@ -1,10 +1,14 @@
 #include "s21_grep.h"
 
-void output(int first_file_index, int argc, int line_num, const char *line, const char* filename, Flags *flagie, int *count_cflag){
+void output(int *printed_lflag, int first_file_index, int argc, int line_num, const char *line, const char* filename, Flags *flagie, int *count_cflag){
     if (flagie->cflag == 1) 
         (*count_cflag)++;
-    else if (flagie->lflag == 1) 
-        printf("%s", filename);
+    else if (flagie->lflag == 1){
+        if ((*printed_lflag) == 0) {
+            printf("%s\n", filename);
+            (*printed_lflag) = 1;
+        }
+    }
     else {
         if (first_file_index == argc - 1){
             if (flagie->nflag == 1) printf("%d:%s", line_num, line);
