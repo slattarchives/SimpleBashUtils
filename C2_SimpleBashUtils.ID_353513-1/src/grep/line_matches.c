@@ -1,12 +1,13 @@
 #include "s21_grep.h"
 
 bool line_matches(const char *line, regex_t *regex, int pattern_count) {
-    bool flag;
-    for (int k = 0; k < pattern_count; k++){
-        if (regexec(&regex[k], line, 0, NULL, 0) == 0) {
+    bool flag = false;
+    int i = 0;
+    while (i < pattern_count && !flag){
+        if (regexec(&regex[i], line, 0, NULL, 0) == 0) {
             flag = true;
-        } else
-            flag = false;
+        } 
+        i++;
     }
 
     return flag;

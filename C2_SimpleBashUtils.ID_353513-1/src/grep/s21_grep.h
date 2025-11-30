@@ -25,7 +25,7 @@ typedef struct {
 char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char *flag_chars, int *first_file_index, int *pattern_index, int *pattern_count);
 void raise_flag(int flag_count, Flags *flagie, char *flag_chars);
 void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, char** pattern, int pattern_count);
-bool line_matches(const char *line, regex_t *regex, int pattern_count)
-void output(int first_file_index, int argc, int line_num, const char *line, int filename, Flags flagie, int *count_cflag)
+bool line_matches(const char *line, regex_t *regex, int pattern_count);
+void output(int first_file_index, int argc, int line_num, const char *line, const char* filename, Flags *flagie, int *count_cflag);
 
 #endif

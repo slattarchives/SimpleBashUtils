@@ -33,8 +33,8 @@ char** parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char 
                     *first_file_index = i;
             }
         }
-        printf("Аргумент %d: '%s'\n", i, argv[i]);
-        printf("pattern_found = %d, first_file_index = %d\n", pattern_found, *first_file_index);
+        //printf("Аргумент %d: '%s'\n", i, argv[i]);
+        //printf("pattern_found = %d, first_file_index = %d\n", pattern_found, *first_file_index);
     }
     //use just because gcc swearing on it 
     if (*first_file_index != 0 && *pattern_index != 0)

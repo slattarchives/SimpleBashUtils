@@ -13,7 +13,8 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
 
             regex_t regex[pattern_count];
 
-            int count_cflag = 0//for counting lines for cflag
+            int count_cflag = 0;//for counting lines for cflag
+            int line_num = 1;
             //regmatch_t match;//переменная для отлова совпадений
 
             for (int i = 0; i < pattern_count; i++) {
@@ -28,20 +29,17 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
             
 
             while ((read = getline(&line, &len, fp)) != -1) {
-                for (int k = 0; k < pattern_count; k++){
-                    bool match = line_matches(line, regex, pattern_count) {
-                        if (flagie.vflag == 1){
-                            match = !match;
-                        }
-                        if (match) {
-                            int line_num = 1;
-                            output(first_file_index, argc, line_num, line, filename, flagie, &count_cflag);
-                        }
+                bool match = line_matches(line, regex, pattern_count);
+                    if (flagie->vflag == 1){
+                        match = !match;
                     }
-                }
+                    if (match) {
+                        
+                        output(first_file_index, argc, line_num, line, filename, flagie, &count_cflag);
+                    }
                 line_num++;
             }
-            if (flagie.cflag == 1){
+            if (flagie->cflag == 1){
                 printf("%s:%d", filename, count_cflag);
             }
             for (int i = 0; i < pattern_count; i++) regfree(&regex[i]); //освобождение ресурсов
