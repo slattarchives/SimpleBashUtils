@@ -12,7 +12,9 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
             ssize_t read;
 
             regex_t regex[pattern_count];
-            regmatch_t match;//переменная для отлова совпадений
+
+            int count_cflag = 0//for counting lines for cflag
+            //regmatch_t match;//переменная для отлова совпадений
 
             for (int i = 0; i < pattern_count; i++) {
                 if (flagie->iflag == 1){
@@ -27,22 +29,26 @@ void process_file(int first_file_index, int argc, char *argv[], Flags *flagie, c
 
             while ((read = getline(&line, &len, fp)) != -1) {
                 for (int k = 0; k < pattern_count; k++){
-                    if (regexec(&regex[k], line, 1, &match, 0) == 0) {
-                        if (first_file_index == argc - 1){
-                            printf("%s", line);
-                            break;
+                    bool match = line_matches(line, regex, pattern_count) {
+                        if (flagie.vflag == 1){
+                            match = !match;
                         }
-                        else {
-                            printf("%s:%s", filename, line);
-                            break;
+                        if (match) {
+                            int line_num = 1;
+                            output(first_file_index, argc, line_num, line, filename, flagie, &count_cflag);
                         }
                     }
                 }
+                line_num++;
             }
-            //for (int i = 0; i < 2; i++) regfree(&regex[i]); //освобождение ресурсов
+            if (flagie.cflag == 1){
+                printf("%s:%d", filename, count_cflag);
+            }
+            for (int i = 0; i < pattern_count; i++) regfree(&regex[i]); //освобождение ресурсов
             fclose(fp);
         } else {
             fprintf(stderr, "grep: cannot open %s\n", filename);
         }
+
     }
 }
