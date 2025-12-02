@@ -16,11 +16,11 @@ typedef struct {
     bool vflag;//-v
 }Flags;
 
-void flags_left(int *c, Flags *flagie);
+void flags_left(int *c, const Flags *flagie);
 void flag_v(int *c);
-void parse_flags(int argc, char *argv[], Flags *flagie, int *flag_count, char *flag_chars, int *first_file_index);
-void raise_flag(int flag_count, Flags *flagie, char *flag_chars);
-void process_file(int first_file_index, int argc, char *argv[], Flags *flagie);
+void parse_flags(int argc, const char *argv[], Flags *flagie, int *flag_count, char *flag_chars, int *first_file_index);
+void raise_flag(int flag_count, Flags *flagie, const char *flag_chars);
+void process_file(int first_file_index, int argc, const char *argv[], const Flags *flagie);
 
 
 #endif
