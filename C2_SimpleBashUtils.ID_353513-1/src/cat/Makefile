@@ -8,9 +8,12 @@ TEST_DIR = src/testTXT
 all: $(BIN)
 
 $(BIN): $(SRC)
- $(CC) $(CFLAGS) $(SRC) -o $(BIN)
+	$(CC) $(CFLAGS) $(SRC) -o $(BIN)
 
 clean:
- rm -f $(BIN)
+	rm -f $(BIN)
 
 re: clean all
+
+test:
+	bash test_cat.sh

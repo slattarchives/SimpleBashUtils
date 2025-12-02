@@ -14,3 +14,6 @@ clean:
 	rm -f $(BIN)
 
 re: clean all
+
+test:
+	bash test_grep.sh
