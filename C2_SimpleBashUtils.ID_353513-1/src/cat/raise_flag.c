@@ -27,6 +27,7 @@ void raise_flag(int flag_count, Flags *flagie, const char *flag_chars) {
       break;
     case 'E':
       flagie->eflag = true;
+      flagie->vflag = true;
       break;
     default:
       fprintf(stderr, "unknown option: -%c\n", flag_chars[i]);

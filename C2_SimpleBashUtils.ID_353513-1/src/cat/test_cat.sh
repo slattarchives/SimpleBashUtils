@@ -106,11 +106,11 @@ run_test "-T and -E together" -T -E "2.txt"
 run_test "--number --squeeze-blank -T" --number --squeeze-blank -T "2.txt"
 
 #Непечатаемые символы
-run_test "-e includes -v + $" -e "nonprintable.txt"
-run_test "-t includes -v + ^I" -t "nonprintable.txt"
+run_test "-e includes -v + $" -e "v.txt"
+run_test "-t includes -v + ^I" -t "v.txt"
 
 # Граничные случаи
-run_test "non-existent file" "v.txt"
+run_test "non-existent file" "nonfile.txt"
 run_test "mix existing and non-existing" "1.txt" "nonexistent.txt" "v.txt"
 
 # === Итог ===
