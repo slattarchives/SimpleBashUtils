@@ -77,9 +77,41 @@ run_test "-n and -e together" -n -e "1.txt"
 run_test "-b and -e together" -b -e "2.txt"
 run_test "-n -b -s -e -t together" -n -b -s -e -t "2.txt"
 
+#Тесты длинных (GNU) флагов
+
+# --number ↔ -n
+run_test "GNU --number" --number "1.txt"
+run_test "--number same as -n" --number "2.txt"
+
+# --number-nonblank ↔ -b
+run_test "GNU --number-nonblank" --number-nonblank "4.txt"
+run_test "--number-nonblank same as -b" --number-nonblank "2.txt"
+
+# --squeeze-blank ↔ -s
+run_test "GNU --squeeze-blank" --squeeze-blank "4.txt"
+run_test "--squeeze-blank on multiple blanks" --squeeze-blank "2.txt"
+
+# -E (только $, без -v)
+run_test "GNU -E end marker" -E "1.txt"
+run_test "-E on file without trailing newline" -E "2.txt"
+
+# -T (только ^I вместо табов, без -v)
+run_test "GNU -T show tabs as ^I" -T "2.txt"
+run_test "-T vs -t (should be same on printable text)" -t "2.txt"
+
+# Комбинации с длинными флагами
+run_test "-E and --number" -E --number "1.txt"
+run_test "--number-nonblank and --squeeze-blank" --number-nonblank --squeeze-blank "4.txt"
+run_test "-T and -E together" -T -E "2.txt"
+run_test "--number --squeeze-blank -T" --number --squeeze-blank -T "2.txt"
+
+#Непечатаемые символы
+run_test "-e includes -v + $" -e "nonprintable.txt"
+run_test "-t includes -v + ^I" -t "nonprintable.txt"
+
 # Граничные случаи
-run_test "non-existent file" "nonexistent.txt"
-run_test "mix existing and non-existing" "1.txt" "nonexistent.txt" "2.txt"
+run_test "non-existent file" "v.txt"
+run_test "mix existing and non-existing" "1.txt" "nonexistent.txt" "v.txt"
 
 # === Итог ===
 echo

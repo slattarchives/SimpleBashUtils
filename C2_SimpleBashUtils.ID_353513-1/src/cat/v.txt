@@ -1,0 +1,6 @@
+Start
+Line with NUL: ^@ end
+BEL: ^G here
+DEL: ^? char
+DOS line^M
+End
